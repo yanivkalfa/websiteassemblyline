@@ -14,11 +14,12 @@ angular
     'ngCookies',
     'ngResource',
     'ngRoute',
-    'ngSanitize'
+    'ngSanitize',
+    'ui.router'
   ])
   .config([
-    '$injector', '$locationProvider', '$routeProvider',
-    function($injector, $locationProvider, $routeProvider) {
+    '$injector', '$locationProvider', '$stateProvider',
+    function($injector, $locationProvider, $stateProvider) {
 
       // setting $auth provider configuration
       //ng.extend($authProvider, ENV.authProvider);
@@ -31,13 +32,15 @@ angular
         return $injector.get('AuthInterceptorService');
       }]);*/
 
-      $routeProvider
-        .when('/', {
+      $stateProvider
+        .state('/', {
+          url: '/',
           templateUrl: 'views/main.html',
           controller: 'MainCtrl',
           controllerAs: 'main'
         })
-        .when('/about', {
+        .state('/about', {
+          url: '/about',
           templateUrl: 'views/about.html',
           controller: 'AboutCtrl',
           controllerAs: 'about'
