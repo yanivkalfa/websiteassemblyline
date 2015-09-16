@@ -18,8 +18,8 @@ angular
     'ui.router'
   ])
   .config([
-    '$injector', '$locationProvider', '$stateProvider',
-    function($injector, $locationProvider, $stateProvider) {
+    '$injector', '$locationProvider', '$stateProvider', '$routeProvider',
+    function($injector, $locationProvider, $stateProvider, $routeProvider) {
 
       // setting $auth provider configuration
       //ng.extend($authProvider, ENV.authProvider);
@@ -44,8 +44,8 @@ angular
           templateUrl: 'views/about.html',
           controller: 'AboutCtrl',
           controllerAs: 'about'
-        })
-        .otherwise({
+        });
+      $routeProvider.otherwise({
           redirectTo: '/'
         });
     }]
