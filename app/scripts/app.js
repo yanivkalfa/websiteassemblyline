@@ -17,8 +17,8 @@ angular
     'ngSanitize'
   ])
   .config([
-    '$injector', '$locationProvider',
-    function($injector, $locationProvider) {
+    '$injector', '$locationProvider', '$routeProvider',
+    function($injector, $locationProvider, $routeProvider) {
 
       // setting $auth provider configuration
       //ng.extend($authProvider, ENV.authProvider);
