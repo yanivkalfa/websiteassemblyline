@@ -19,10 +19,13 @@ module.exports = function (grunt) {
     cdnify: 'grunt-google-cdn'
   });
 
+  // Routing requests
+  var rewriteRulesSnippet = require('grunt-connect-rewrite/lib/utils').rewriteRequest;
+  grunt.loadNpmTasks('grunt-connect-rewrite');
+
   // Configurable paths for the application
   var appConfig = {
     app: require('./bower.json').appPath || 'app',
-    //dist: '/var/www/websiteassemblyline/dist'
     dist: 'dist'
   };
 
@@ -39,14 +42,14 @@ module.exports = function (grunt) {
         tasks: ['wiredep']
       },
       js: {
-        files: ['<%= yeoman.app %>/scripts/{,*/}*.js'],
+        files: ['<%= yeoman.app %>/{,**/}*.js'],
         tasks: ['newer:jshint:all'],
         options: {
           livereload: '<%= connect.options.livereload %>'
         }
       },
       jsTest: {
-        files: ['test/spec/{,*/}*.js'],
+        files: ['test/spec/{,**/}*.js'],
         tasks: ['newer:jshint:test', 'karma']
       },
       compass: {
@@ -61,7 +64,7 @@ module.exports = function (grunt) {
           livereload: '<%= connect.options.livereload %>'
         },
         files: [
-          '<%= yeoman.app %>/{,*/}*.html',
+          '<%= yeoman.app %>/{,**/}*.html',
           '.tmp/styles/{,*/}*.css',
           '<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
         ]
@@ -76,11 +79,17 @@ module.exports = function (grunt) {
         hostname: 'localhost',
         livereload: 35729
       },
+      // Rewrite rules
+      rules: [
+        // redirecting everything to root
+        {from: '^[^\\.]*$', to: '/index.html'}
+      ],
       livereload: {
         options: {
           open: true,
           middleware: function (connect) {
             return [
+              rewriteRulesSnippet,
               connect.static('.tmp'),
               connect().use(
                 '/bower_components',
@@ -100,6 +109,7 @@ module.exports = function (grunt) {
           port: 9001,
           middleware: function (connect) {
             return [
+              rewriteRulesSnippet,
               connect.static('.tmp'),
               connect.static('test'),
               connect().use(
@@ -128,14 +138,14 @@ module.exports = function (grunt) {
       all: {
         src: [
           'Gruntfile.js',
-          '<%= yeoman.app %>/scripts/{,*/}*.js'
+          '<%= yeoman.app %>/{,**/}*.js'
         ]
       },
       test: {
         options: {
           jshintrc: 'test/.jshintrc'
         },
-        src: ['test/spec/{,*/}*.js']
+        src: ['test/spec/{,**/}*.js']
       }
     },
 
@@ -215,7 +225,7 @@ module.exports = function (grunt) {
         cssDir: '.tmp/styles',
         generatedImagesDir: '.tmp/images/generated',
         imagesDir: '<%= yeoman.app %>/images',
-        javascriptsDir: '<%= yeoman.app %>/scripts',
+        javascriptsDir: '<%= yeoman.app %>/',
         fontsDir: '<%= yeoman.app %>/styles/fonts',
         importPath: './bower_components',
         httpImagesPath: '/images',
@@ -241,7 +251,7 @@ module.exports = function (grunt) {
     filerev: {
       dist: {
         src: [
-          '<%= yeoman.dist %>/scripts/{,*/}*.js',
+          '<%= yeoman.dist %>/{,**/}*.js',
           '<%= yeoman.dist %>/styles/{,*/}*.css',
           '<%= yeoman.dist %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
           '<%= yeoman.dist %>/styles/fonts/*'
@@ -270,9 +280,9 @@ module.exports = function (grunt) {
 
     // Performs rewrites based on filerev and the useminPrepare configuration
     usemin: {
-      html: ['<%= yeoman.dist %>/{,*/}*.html'],
+      html: ['<%= yeoman.dist %>/{,**/}*.html'],
       css: ['<%= yeoman.dist %>/styles/{,*/}*.css'],
-      js: ['<%= yeoman.dist %>/scripts/{,*/}*.js'],
+      js: ['<%= yeoman.dist %>/scripts/{,**/}*.js'],
       options: {
         assetsDirs: [
           '<%= yeoman.dist %>',
@@ -358,7 +368,7 @@ module.exports = function (grunt) {
           usemin: 'scripts/scripts.js'
         },
         cwd: '<%= yeoman.app %>',
-        src: 'views/{,*/}*.html',
+        src: 'views/{,**/}*.html',
         dest: '.tmp/templateCache.js'
       }
     },
@@ -453,6 +463,7 @@ module.exports = function (grunt) {
       'wiredep',
       'concurrent:server',
       'autoprefixer:server',
+      'configureRewriteRules',
       'connect:livereload',
       'watch'
     ]);
@@ -468,6 +479,7 @@ module.exports = function (grunt) {
     'wiredep',
     'concurrent:test',
     'autoprefixer',
+    'configureRewriteRules',
     'connect:test',
     'karma'
   ]);
@@ -478,6 +490,7 @@ module.exports = function (grunt) {
     'useminPrepare',
     'concurrent:dist',
     'autoprefixer',
+    'configureRewriteRules',
     'ngtemplates',
     'concat',
     'ngAnnotate',
