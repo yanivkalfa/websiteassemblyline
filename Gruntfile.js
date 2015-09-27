@@ -420,6 +420,15 @@ module.exports = function (grunt) {
           dest: '<%= yeoman.dist %>'
         }]
       },
+      html: {
+        files: [{
+          expand: true,
+          dot: true,
+          cwd: '<%= yeoman.app %>',
+          dest: '<%= yeoman.dist %>',
+          src: ['components/{,**/}*.html']
+        }]
+      },
       styles: {
         expand: true,
         cwd: '<%= yeoman.app %>/styles',
@@ -495,6 +504,7 @@ module.exports = function (grunt) {
     'concat',
     'ngAnnotate',
     'copy:dist',
+    'copy:html',
     'cdnify',
     'cssmin',
     'uglify',
@@ -508,4 +518,5 @@ module.exports = function (grunt) {
     'test',
     'build'
   ]);
+
 };

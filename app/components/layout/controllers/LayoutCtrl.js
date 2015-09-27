@@ -10,7 +10,7 @@
 (function(ng){
   ng
     .module('websiteassemblylineApp')
-    .controller('LayoutCtrl', function ($scope) {
+    .controller('LayoutCtrl', ['$scope', function ($scope) {
       $scope.menus = [
         {id:'home',       link:'layout.home',       label: 'Home'},
         {id:'portfolio',  link:'layout.portfolio',  label: 'Portfolio'},
@@ -20,10 +20,5 @@
       $scope.isActive = function(){
         return false;
       };
-    });
+    }]);
 })(angular);
-
-
-
-
-
