@@ -66,9 +66,23 @@ body {
     margin-top: 28px;
   }
 }
-
-.profile-container{
+.clearfix{
+  clear:both;
+}
+.portfolio-container{
   width:100%;
+}
+.showcase-wrap{
+  padding:5px 20px;
+}
+.showcase{
+  padding:0px;
+  margin:0px;
+}
+
+.showcase li {
+  float:left;
+  margin:5px;
 }
 
 /* Responsive: Portrait tablets and up */
