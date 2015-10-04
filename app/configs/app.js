@@ -34,10 +34,10 @@
          }]);*/
       }])
     .run([
-      '$rootScope', '$state',
-      function () {
-        /*
-        $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
-        });*/
+      '$rootScope', '$state', 'ActiveTabsService',
+      function ($rootScope, $state, ActiveTabsService) {
+        $rootScope.$on('$stateChangeSuccess', function () {
+          ActiveTabsService.checkMenus();
+        });
       }]);
 })(angular);

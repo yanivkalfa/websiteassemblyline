@@ -16,7 +16,7 @@
       <div class="collapse navbar-collapse" id="js-navbar-collapse">
 
         <ul class="nav navbar-nav">
-          <li ng-repeat="menu in menus track by menu.id" ng-class="{'active' : isActive(menu)}"><a ui-sref="{{menu.link}}">{{menu.label}}</a></li>
+          <li ng-repeat="menu in menus track by menu.id" ng-class="{'active' : menu.isActive}"><a ui-sref="{{menu.name}}">{{menu.label}}</a></li>
         </ul>
       </div>
     </div>
@@ -29,6 +29,13 @@
 
 <div class="footer">
   <div class="container">
-    <p><span class="glyphicon glyphicon-heart"></span> from the Yeoman team</p>
+
+    <div class="collapse navbar-collapse" id="js-navbar-collapse">
+
+      <ul class="nav navbar-nav">
+        <li ng-repeat="menu in menus track by menu.id" ng-class="{'active' : isActive(menu)}"><a ui-sref="{{menu.name}}">{{menu.label}}</a></li>
+      </ul>
+    </div>
+  </div>
   </div>
 </div>

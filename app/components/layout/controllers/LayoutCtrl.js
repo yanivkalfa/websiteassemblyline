@@ -10,15 +10,18 @@
 (function(ng){
   ng
     .module('websiteassemblylineApp')
-    .controller('LayoutCtrl', ['$scope', function ($scope) {
+    .controller('LayoutCtrl', ['$scope', '$state', 'UtilsService', 'ActiveTabsService', function ($scope, $state, UtilsService, ActiveTabsService) {
       $scope.menus = [
-        {id:'home',       link:'layout.home',       label: 'Home'},
-        {id:'portfolio',  link:'layout.portfolio',  label: 'Portfolio'},
-        {id:'about',      link:'layout.about',      label: 'About'}
+        {id:'home',       name:'layout.home',       label: 'Home', isActive : true},
+        {id:'portfolio',  name:'layout.portfolio',  label: 'Portfolio', isActive : false},
+        {id:'about',      name:'layout.about',      label: 'About', isActive : false}
       ];
 
-      $scope.isActive = function(){
-        return false;
-      };
+      if(!ActiveTabsService.getMenu()){
+        ActiveTabsService.addMenu($scope.menus, 'layout' );
+        ActiveTabsService.checkMenus();
+      }
+
+
     }]);
 })(angular);
