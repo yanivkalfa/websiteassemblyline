@@ -9,10 +9,10 @@
     .config([
       '$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
 
-        // default rout
+        // Default rout
         $urlRouterProvider.otherwise('/');
 
-        // main rout
+        // Main rout
         $stateProvider
           .state('layout', {
             abstract:true,
