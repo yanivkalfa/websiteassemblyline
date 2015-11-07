@@ -1,6 +1,6 @@
 # websiteassemblyline
 
-This project is generated with 
+This project is generated with yo 
 version 0.12.1.
 
 ## Build & development
