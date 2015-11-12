@@ -19,6 +19,7 @@ module.exports = function(config) {
       "jasmine"
     ],
 
+
     // list of files / patterns to load in the browser
     files: [
       // bower:js
