@@ -23,7 +23,7 @@ module.exports = function (grunt) {
   var rewriteRulesSnippet = require('grunt-connect-rewrite/lib/utils').rewriteRequest;
   grunt.loadNpmTasks('grunt-connect-rewrite');
 
-  // Configurable paths for the application
+  // Configurable paths for the application 
   var appConfig = {
     app: require('./bower.json').appPath || 'app',
     dist: 'dist'
