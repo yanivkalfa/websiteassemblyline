@@ -5,7 +5,7 @@
 // for performance reasons we're only matching one level down:
 // 'test/spec/{,*/}*.js'
 // use this if you want to recursively match all subfolders:
-// 'test/spec/**/*.js'
+// 'test/spec/**/*.js' 
 
 module.exports = function (grunt) {
 
@@ -23,7 +23,7 @@ module.exports = function (grunt) {
   var rewriteRulesSnippet = require('grunt-connect-rewrite/lib/utils').rewriteRequest;
   grunt.loadNpmTasks('grunt-connect-rewrite');
 
-  // Configurable paths for the application 
+  // Configurable paths for the application  
   var appConfig = {
     app: require('./bower.json').appPath || 'app',
     dist: 'dist'
