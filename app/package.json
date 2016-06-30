@@ -1,0 +1,8 @@
+{
+  "name": "Lottobuy",
+  "version": "0.0.1",
+  "description": "Lottobuy is a auction website like ebay only difference is instead of auction people set up lotteries",
+  "dependencies": {
+    "socket.io": "^1.4.8"
+  }
+}
